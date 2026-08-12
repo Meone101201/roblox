@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Expeditions - Team Builder (จัดทีมตัวละคร)</title>
+  <!-- SEO & Meta -->
+  <meta name="description" content="เว็บแอปพลิเคชันจัดทีมตัวละคร สวมใส่ไอเทม และ Trait สำหรับ Anime Expeditions พร้อมระบบแชร์ทีมและพรีวิวทันสมัย">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Navbar -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon">⚔️</div>
+        <div class="brand-text">
+          <h1>ANIME EXPEDITIONS</h1>
+          <span>Team & Equipment Builder</span>
+        </div>
+      </div>
+      <div class="global-actions">
+        <button id="btn-clear-all" class="btn btn-danger">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          เคลียร์ทุกทีมทิ้ง
+        </button>
+        <button id="btn-share" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          แชร์ทีม / คัดลอกลิงก์
+        </button>
+        <button id="btn-export" class="btn btn-accent">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          ส่งออกรูปภาพ
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="main-layout">
+    
+    <!-- TOP SECTION: Main Catalog Container with 3 Tabs -->
+    <section class="top-catalog-section">
+      <div class="main-category-tabs" id="main-catalog-tabs">
+        <button class="main-tab-btn active" data-tab="units">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          รายการตัวละคร (Units)
+        </button>
+        <button class="main-tab-btn" data-tab="std-equip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          รายการ Standard Equipment
+        </button>
+        <button class="main-tab-btn" data-tab="trait">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          รายการ Traits
+        </button>
+      </div>
+
+      <div class="catalog-tab-panels">
+        <!-- 1. Units Panel -->
+        <div class="catalog-panel active" id="panel-units">
+          <div class="panel-toolbar">
+            <div class="rarity-tabs" id="unit-tabs">
+              <button class="tab-btn active secret" data-rarity="Secret">Secret (S)</button>
+              <button class="tab-btn exclusive" data-rarity="Exclusive">Exclusive (E)</button>
+              <button class="tab-btn mythic" data-rarity="Mythic">Mythic (M)</button>
+              <button class="tab-btn legendary" data-rarity="Legendary">Legendary (L)</button>
+              <button class="tab-btn epic" data-rarity="Epic">Epic (E)</button>
+              <button class="tab-btn rare" data-rarity="Rare">Rare (R)</button>
+            </div>
+            <div class="catalog-search">
+              <input type="text" id="unit-search" placeholder="ค้นหาตัวละคร..." autocomplete="off">
+            </div>
+          </div>
+          
+          <div class="units-grid-wrapper" id="units-catalog-wrapper">
+            <div class="catalog-grid units-grid" id="units-grid"></div>
+          </div>
+        </div>
+
+        <!-- 2. Standard Equipment Panel -->
+        <div class="catalog-panel" id="panel-std-equip">
+          <div class="catalog-panel-subtext">ใส่ได้เฉพาะตัวละครระดับ Secret, Exclusive, Mythic (สูงสุด 2 ชิ้น / ตัว)</div>
+          <div class="catalog-grid equip-grid" id="std-equip-grid"></div>
+        </div>
+
+        <!-- 3. Trait Panel -->
+        <div class="catalog-panel" id="panel-trait">
+          <div class="catalog-panel-subtext">ใส่ได้กับตัวละครทุกระดับ (1 Trait / ตัว)</div>
+          <div class="catalog-grid trait-grid" id="trait-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM SECTION: Teams Container -->
+    <section class="bottom-teams-section">
+      <div class="panel-header">
+        <h2><span class="highlight-text">ทีมของคุณ</span> ( maximum 6 ตัวละคร / ทีม )</h2>
+        <div class="panel-info">
+          <span class="badge info-badge">คำแนะนำ: เลือก Tab รายการด้านบน แล้วคลิกหรือลากมาวางในทีมด้านล่าง</span>
+        </div>
+      </div>
+
+      <!-- Team Tabs Navigation -->
+      <div class="team-tabs-container">
+        <div class="team-tabs-scroll-wrapper">
+          <div id="team-tabs" class="team-tabs"></div>
+        </div>
+        <button id="btn-add-team-inline" class="btn-add-team-inline" title="เพิ่มทีมใหม่">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <div id="teams-container" class="teams-container"></div>
+    </section>
+
+  </main>
+
+  <!-- Export Preview Modal -->
+  <div id="export-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>🖼️ พรีวิวรูปภาพทีม (Anime_Expeditions_Teams.png)</h3>
+        <button id="btn-close-modal" class="modal-close-btn">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-instruction">กดปุ่ม <strong>"ดาวน์โหลดรูปภาพ (.PNG)"</strong> หรือคลิกขวาที่รูปด้านล่างแล้วเลือก <em>"Save image as... / บันทึกรูปภาพเป็น..."</em></p>
+        <div class="modal-img-container">
+          <div class="modal-zoom-controls">
+            <button class="btn-zoom active" data-zoom="100">
+              <span>100%</span>
+            </button>
+            <button class="btn-zoom" data-zoom="75">
+              <span>75%</span>
+            </button>
+            <button class="btn-zoom" data-zoom="50">
+              <span>50%</span>
+            </button>
+            <button class="btn-zoom" data-zoom="fit">
+              <span>พอดีหน้าจอ</span>
+            </button>
+          </div>
+          <div class="modal-img-wrapper">
+            <img id="export-preview-img" src="" alt="Team Image Preview">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="btn-modal-download" href="#" download="Anime_Expeditions_Teams.png" class="btn btn-primary btn-lg">
+          💾 ดาวน์โหลดรูปภาพ (.PNG)
+        </a>
+        <button id="btn-modal-close-bottom" class="btn btn-secondary">ปิดหน้าต่าง</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip element -->
+  <div id="app-tooltip" class="app-tooltip hidden"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Hidden canvas for image export -->
+  <canvas id="export-canvas" style="display:none;"></canvas>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
